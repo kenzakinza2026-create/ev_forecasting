@@ -1,0 +1,531 @@
+{
+    "uid": "dcforecaster-v3",
+    "title": "Mlflow v3 (Q95)",
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "version": 1,
+    "refresh": "30s",
+    "time": {
+        "from": "now-24h",
+        "to": "now"
+    },
+    "tags": [
+        "dcforecaster",
+        "mlflow",
+        "v3"
+    ],
+    "panels": [
+        {
+            "id": 1,
+            "type": "row",
+            "title": "Stage 1: PR-AUC (does the classifier detect activity?)",
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            }
+        },
+        {
+            "id": 2,
+            "type": "stat",
+            "title": "PR-AUC arrival",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 12,
+                "x": 0,
+                "y": 1
+            },
+            "targets": [
+                {
+                    "expr": "stage1_pr_auc_arrival",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0.1
+                            },
+                            {
+                                "color": "green",
+                                "value": 0.3
+                            }
+                        ]
+                    },
+                    "min": 0,
+                    "max": 1,
+                    "decimals": 3
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 3,
+            "type": "stat",
+            "title": "PR-AUC departure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 12,
+                "x": 12,
+                "y": 1
+            },
+            "targets": [
+                {
+                    "expr": "stage1_pr_auc_departure",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0.1
+                            },
+                            {
+                                "color": "green",
+                                "value": 0.3
+                            }
+                        ]
+                    },
+                    "min": 0,
+                    "max": 1,
+                    "decimals": 3
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 10,
+            "type": "row",
+            "title": "Skill vs always-zero baseline, 1-step (must stay above 0 %)",
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 7
+            }
+        },
+        {
+            "id": 11,
+            "type": "stat",
+            "title": "Skill arrival",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 0,
+                "y": 8
+            },
+            "targets": [
+                {
+                    "expr": "onestep_skill_vs_zero_pct_arrival",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            }
+                        ]
+                    },
+                    "unit": "percent",
+                    "decimals": 1
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 12,
+            "type": "stat",
+            "title": "Skill departure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 6,
+                "y": 8
+            },
+            "targets": [
+                {
+                    "expr": "onestep_skill_vs_zero_pct_departure",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            }
+                        ]
+                    },
+                    "unit": "percent",
+                    "decimals": 1
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 13,
+            "type": "stat",
+            "title": "Skill energy",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 12,
+                "y": 8
+            },
+            "targets": [
+                {
+                    "expr": "onestep_skill_vs_zero_pct_energy",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            }
+                        ]
+                    },
+                    "unit": "percent",
+                    "decimals": 1
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 14,
+            "type": "stat",
+            "title": "Skill duration",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 18,
+                "y": 8
+            },
+            "targets": [
+                {
+                    "expr": "onestep_skill_vs_zero_pct_duration",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            }
+                        ]
+                    },
+                    "unit": "percent",
+                    "decimals": 1
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 20,
+            "type": "row",
+            "title": "Q95 coverage, 1-step (target: 95 %)",
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 14
+            }
+        },
+        {
+            "id": 21,
+            "type": "stat",
+            "title": "Coverage arrival",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 0,
+                "y": 15
+            },
+            "targets": [
+                {
+                    "expr": "onestep_coverage_pct_arrival",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "orange",
+                                "value": 90
+                            },
+                            {
+                                "color": "green",
+                                "value": 93
+                            },
+                            {
+                                "color": "orange",
+                                "value": 99
+                            }
+                        ]
+                    },
+                    "min": 80,
+                    "max": 100,
+                    "unit": "percent",
+                    "decimals": 2
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 22,
+            "type": "stat",
+            "title": "Coverage departure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 6,
+                "y": 15
+            },
+            "targets": [
+                {
+                    "expr": "onestep_coverage_pct_departure",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "orange",
+                                "value": 90
+                            },
+                            {
+                                "color": "green",
+                                "value": 93
+                            },
+                            {
+                                "color": "orange",
+                                "value": 99
+                            }
+                        ]
+                    },
+                    "min": 80,
+                    "max": 100,
+                    "unit": "percent",
+                    "decimals": 2
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 23,
+            "type": "stat",
+            "title": "Coverage energy",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 12,
+                "y": 15
+            },
+            "targets": [
+                {
+                    "expr": "onestep_coverage_pct_energy",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "orange",
+                                "value": 90
+                            },
+                            {
+                                "color": "green",
+                                "value": 93
+                            },
+                            {
+                                "color": "orange",
+                                "value": 99
+                            }
+                        ]
+                    },
+                    "min": 80,
+                    "max": 100,
+                    "unit": "percent",
+                    "decimals": 2
+                },
+                "overrides": []
+            }
+        },
+        {
+            "id": 24,
+            "type": "stat",
+            "title": "Coverage duration",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 6,
+                "x": 18,
+                "y": 15
+            },
+            "targets": [
+                {
+                    "expr": "onestep_coverage_pct_duration",
+                    "refId": "A"
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "orange",
+                                "value": 90
+                            },
+                            {
+                                "color": "green",
+                                "value": 93
+                            },
+                            {
+                                "color": "orange",
+                                "value": 99
+                            }
+                        ]
+                    },
+                    "min": 80,
+                    "max": 100,
+                    "unit": "percent",
+                    "decimals": 2
+                },
+                "overrides": []
+            }
+        }
+    ]
+}

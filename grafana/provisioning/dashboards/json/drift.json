@@ -1,0 +1,559 @@
+{
+    "id": null,
+    "uid": "advqdrf",
+    "title": "Evidently AI - Drift Monitoring (Global Summary)",
+    "tags": [
+        "evidently",
+        "drift",
+        "dcforecaster"
+    ],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "version": 1,
+    "refresh": "30s",
+    "time": {
+        "from": "now-24h",
+        "to": "now"
+    },
+    "templating": {
+        "list": [
+            {
+                "name": "job",
+                "type": "query",
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus-ds"
+                },
+                "query": "label_values(dataset_drift, job)",
+                "refresh": 2,
+                "includeAll": true,
+                "multi": true,
+                "current": {
+                    "text": "All",
+                    "value": "$__all"
+                }
+            }
+        ]
+    },
+    "panels": [
+        {
+            "id": 1,
+            "type": "row",
+            "title": "Global Results - Data Drift",
+            "gridPos": {
+                "x": 0,
+                "y": 0,
+                "w": 24,
+                "h": 1
+            },
+            "collapsed": false,
+            "panels": []
+        },
+        {
+            "id": 2,
+            "type": "stat",
+            "title": "dataset_drift (global)",
+            "gridPos": {
+                "x": 0,
+                "y": 1,
+                "w": 8,
+                "h": 6
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "dataset_drift{job=~\"$job\"}",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "bool",
+                    "decimals": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "mappings": [
+                        {
+                            "type": "value",
+                            "options": {
+                                "0": {
+                                    "text": "No drift"
+                                },
+                                "1": {
+                                    "text": "Drift detected"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "textMode": "auto",
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto"
+            }
+        },
+        {
+            "id": 3,
+            "type": "gauge",
+            "title": "drift_share",
+            "gridPos": {
+                "x": 8,
+                "y": 1,
+                "w": 8,
+                "h": 6
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "drift_share{job=~\"$job\"}",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "percentunit",
+                    "min": 0,
+                    "max": 1,
+                    "decimals": 2,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false
+            }
+        },
+        {
+            "id": 4,
+            "type": "stat",
+            "title": "n_drifted_columns",
+            "gridPos": {
+                "x": 16,
+                "y": 1,
+                "w": 8,
+                "h": 6
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "n_drifted_columns{job=~\"$job\"}",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "short",
+                    "decimals": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "textMode": "auto",
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto"
+            }
+        },
+        {
+            "id": 200,
+            "type": "row",
+            "title": "Global Results - Concept Drift (Target vs Prediction)",
+            "gridPos": {
+                "x": 0,
+                "y": 7,
+                "w": 24,
+                "h": 1
+            },
+            "collapsed": false,
+            "panels": []
+        },
+        {
+            "id": 201,
+            "type": "stat",
+            "title": "concept_drift_score",
+            "gridPos": {
+                "x": 0,
+                "y": 8,
+                "w": 12,
+                "h": 6
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "concept_drift_score",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "percentunit",
+                    "decimals": 3,
+                    "min": 0,
+                    "max": 1,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "textMode": "auto",
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto"
+            }
+        },
+        {
+            "id": 202,
+            "type": "stat",
+            "title": "concept_drift_detected",
+            "gridPos": {
+                "x": 12,
+                "y": 8,
+                "w": 12,
+                "h": 6
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "concept_drift_detected",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "bool",
+                    "decimals": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "mappings": [
+                        {
+                            "type": "value",
+                            "options": {
+                                "0": {
+                                    "text": "No drift"
+                                },
+                                "1": {
+                                    "text": "Drift detected"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "textMode": "auto",
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto"
+            }
+        },
+        {
+            "id": 19,
+            "type": "row",
+            "title": "Global Results - Data Quality",
+            "gridPos": {
+                "x": 0,
+                "y": 14,
+                "w": 24,
+                "h": 1
+            },
+            "collapsed": false,
+            "panels": []
+        },
+        {
+            "id": 20,
+            "type": "stat",
+            "title": "n_missing_values_total",
+            "gridPos": {
+                "x": 0,
+                "y": 15,
+                "w": 8,
+                "h": 5
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "n_missing_values_total{job=~\"$job\"}",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "short",
+                    "decimals": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "textMode": "auto",
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto"
+            }
+        },
+        {
+            "id": 21,
+            "type": "stat",
+            "title": "n_out_of_range_total",
+            "gridPos": {
+                "x": 8,
+                "y": 15,
+                "w": 8,
+                "h": 5
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "n_out_of_range_total{job=~\"$job\"}",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "short",
+                    "decimals": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "textMode": "auto",
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto"
+            }
+        },
+        {
+            "id": 23,
+            "type": "stat",
+            "title": "n_unexpected_categories",
+            "gridPos": {
+                "x": 16,
+                "y": 15,
+                "w": 8,
+                "h": 5
+            },
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-ds"
+            },
+            "targets": [
+                {
+                    "expr": "n_unexpected_categories{job=~\"$job\"}",
+                    "refId": "A",
+                    "instant": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-ds"
+                    }
+                }
+            ],
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "short",
+                    "decimals": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "options": {
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "orientation": "auto",
+                "textMode": "auto",
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto"
+            }
+        }
+    ]
+}

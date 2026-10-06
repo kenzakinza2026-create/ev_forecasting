@@ -1,0 +1,39 @@
+{
+  "pipeline": "AC",
+  "charger_type": "AC",
+  "quantile_alpha": 0.95,
+  "mixture_mode": "exact",
+  "quantile_grid": [
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.925,
+    0.95,
+    0.965,
+    0.98,
+    0.99
+  ],
+  "duration_cap_mins": 1440.0,
+  "log_transform_targets": {
+    "reg_arrival_count": false,
+    "reg_departure_count": false,
+    "reg_energy": false,
+    "reg_duration": true
+  },
+  "splits": {
+    "train_end": "2026-01-01 00:00:00",
+    "valid_end": "2026-04-01 00:00:00",
+    "test_start": "2026-04-01 00:00:00",
+    "test_end": "2026-08-03 00:00:00"
+  },
+  "duration_rows_capped": 49
+}

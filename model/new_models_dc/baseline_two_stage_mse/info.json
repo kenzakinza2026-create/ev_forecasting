@@ -1,0 +1,18 @@
+{
+  "arrival_count": {
+    "has_regressor": true,
+    "n_active_train": 2197
+  },
+  "departure_count": {
+    "has_regressor": true,
+    "n_active_train": 2228
+  },
+  "avg_energy_kWh": {
+    "has_regressor": true,
+    "n_active_train": 2197
+  },
+  "avg_duration_mins": {
+    "has_regressor": true,
+    "n_active_train": 2197
+  }
+}

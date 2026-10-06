@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+venv/
+.env
+
+# MLflow / DVC local artifacts (régénérés au runtime)
+mlruns/
+mlartifacts/
+mlflow.db
+
+# Données générées au runtime
+predictions_log.csv
+drift_reports/
+drift_report.html
+
+# Node (mlops-dashboard frontend)
+mlops-dashboard/frontend/node_modules/
+mlops-dashboard/frontend/dist/
+
+# OS
+.DS_Store
